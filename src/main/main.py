@@ -19,7 +19,7 @@ if __name__ == '__main__':
     print(df[['title', 'pages']].head(3))
     df = df.fillna(0)
     print("Deleting old book list...")
-    es.indices.delete("questions", ignore=[400, 404])
+    es.indices.delete("books", ignore=[400, 404])
     print("Done with delete!")
     
     es.indices.create("books", {})
