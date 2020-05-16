@@ -6,6 +6,7 @@ Created on May 16, 2020
 
 import pandas as pd
 from elasticsearch import Elasticsearch
+import random
 
 if __name__ == '__main__':
     # connect to local host
@@ -31,9 +32,10 @@ if __name__ == '__main__':
         author_arr = book.authors.split(", ")
         bookInfo = {"title": book.title, "authors": author_arr, 'pages': book.pages, 'isbn13': str(book['isbn13']), 'quantity': 2}
         # create new book entry
+        q = random.randint(1, 5)
         es.create("books", id,
                    {"title": bookInfo['title'], "authors": bookInfo['authors'],
-                    "pages": bookInfo['pages'], "isbn": bookInfo['isbn13']}, doc_type="_doc");
+                    "pages": bookInfo['pages'], "isbn": bookInfo['isbn13'], "quantity": q}, doc_type="_doc");
         id = id + 1
     
     print("done")
